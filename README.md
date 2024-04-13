@@ -1,3 +1,26 @@
+
+# NX
+## 1. Create a host application (angular 17)
+## 2. Create a feature library for signals demo
+## 3. Create a feature library for NGRX demo
+## 4. Create a feature library for component inheritance demo
+## 5. Create a feature library for component composition demo
+## 6. Create a shared library for API data access 
+
+# Golang
+## 1. Create simple REST API
+
+
+# Plans for Docker
+## 1. Create a Dockerfile
+## 2. Create a docker-compose file
+## 3. Set up the Angular app
+## 4. Set up the Golang app
+
+
+
+
+
 # Org
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
@@ -60,3 +83,5 @@ It will show tasks that you can run with Nx.
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
+
+
