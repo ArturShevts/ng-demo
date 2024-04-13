@@ -1,0 +1,46 @@
+.loading {
+  &__wrapper {
+    display: flex;
+    line-height: 0;
+    margin: -10px;
+    :nth-child(1) span {
+      animation-delay: 0ms;
+    }
+    :nth-child(2) span {
+      animation-delay: 125ms;
+    }
+    :nth-child(3) span {
+      animation-delay: 250ms;
+    }
+  }
+
+  &__dot {
+    margin: 6px;
+    height: 12px;
+    width: 12px;
+    span {
+      height: 12px;
+      width: 12px;
+      background-color: #7594b1;
+      border-radius: 50%;
+      display: inline-block;
+
+      animation-name: chat-app-pulse;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  @keyframes chat-app-pulse {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1.5, 1.5);
+    }
+    50% {
+      transform: scale(1, 1);
+    }
+  }
+}

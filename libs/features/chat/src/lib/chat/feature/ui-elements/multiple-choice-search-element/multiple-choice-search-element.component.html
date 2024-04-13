@@ -1,0 +1,12 @@
+<chat-app-radio-group>
+  <chat-app-radio-button
+    *ngFor="let insight of elementData; let i = index"
+    name="insightType"
+    [value]="insight"
+    [disabled]="disabled"
+    [required]="true"
+    (radioButtonChange)="submitSelection(insight)"
+  >
+    <chat-app-radio-label [innerHTML]="insight"></chat-app-radio-label>
+  </chat-app-radio-button>
+</chat-app-radio-group>

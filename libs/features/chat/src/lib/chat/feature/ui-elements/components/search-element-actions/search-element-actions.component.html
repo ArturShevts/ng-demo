@@ -1,0 +1,22 @@
+<button
+  *ngIf="primaryBtnText"
+  chat-appCTA="primary"
+  size="small"
+  (click)="emitPrimaryBtnAction()"
+  [disabled]="disablePrimaryBtn"
+>
+  {{ primaryBtnText }}
+</button>
+<button
+  *ngIf="secondaryBtnText"
+  chat-appCTA="secondary"
+  size="small"
+  (click)="emitSecondaryBtnAction()"
+  [disabled]="disableSecondaryBtn"
+>
+  {{ secondaryBtnText }}
+</button>
+
+<chat-app-cta-text elementType="button" *ngIf="tertiaryBtnText" density="default" (click)="emitTertiaryBtnAction()">
+  {{ tertiaryBtnText }}
+</chat-app-cta-text>

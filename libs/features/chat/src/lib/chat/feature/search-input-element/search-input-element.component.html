@@ -1,0 +1,22 @@
+<form
+  chat-appInput
+  class="chat-app-form-control search-form"
+  (ngSubmit)="submit(this.fgSearch.get('search')?.value.toString())"
+  [formGroup]="fgSearch"
+>
+  <chat-app-icon class="search-icon" *ngIf="isSearch" name="search"> </chat-app-icon>
+  <input
+    class="search-input"
+    type="search"
+    formControlName="search"
+    name="question"
+    id="question"
+    [placeholder]="isSearch ? 'Search' : 'Ask a follow up question or search for something else'"
+    aria-describedby="chat__accessibility"
+  />
+
+  <!--  <button aria-label="clear" class="chat-bar-component__clear-text" type="reset"></button>-->
+
+  <chat-app-icon class="search-icon search-icon-2" *ngIf="!isSearch" name="transfer"></chat-app-icon>
+  <span id="chat__accessibility" class="chat-app-sr-only"> Enter </span>
+</form>

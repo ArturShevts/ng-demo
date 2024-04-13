@@ -1,0 +1,110 @@
+<!--*ngIf="startError$ | async"-->
+
+<chat-app-alert
+  *ngIf="startQueryError$ | async; else searchComponent"
+  class="technicalErrorAlert search__alert"
+  kind="danger"
+  iconTitle="Attention"
+  [heading]="'errors.httpPageErrorHeader' | translate"
+>
+  <chat-app-alert-content>
+    {{ 'errors.httpPageErrorBody.1' | translate }}
+  </chat-app-alert-content>
+</chat-app-alert>
+
+<ng-template #searchComponent>
+  <div
+    class="back__container"
+    *ngIf="activate"
+    [ngClass]="{ activated: activate }"
+  >
+    <div class="back__text">{{ 'personal.search.title' | translate }}</div>
+    <chat-app-cta-text
+      elementType="button"
+      (click)="onBack()"
+      icon="chevron-left"
+    >
+      Back
+    </chat-app-cta-text>
+  </div>
+
+  <div
+    #resultsContainer
+    class="results"
+    [ngClass]="{ activated: activate }"
+    *ngIf="activate"
+  >
+    <div
+      class="wrapper"
+      #responseWrapper
+      *ngFor="let vm of responseArr$ | async"
+    >
+      <chat-question *ngIf="!vm.isResponse"> {{ vm.query }} </chat-question>
+      <chat-error *ngIf="vm.isResponse && vm.error"></chat-error>
+
+      <chat-answer
+        *ngIf="vm.isResponse && vm.response as response"
+        [ngClass]="{ 'knowledge-answer': vm.response.meta?.type === 'info' }"
+      >
+        <chat-element-text *ngIf="response.fulfillmentText">
+          <p>{{ response.fulfillmentText }}</p>
+        </chat-element-text>
+
+        <ng-container>
+          <chat-app-branch-query-element
+            *ngIf="response.data?.insight?.richText?.length"
+            [elementData]="response.data.insight.richText"
+          >
+          </chat-app-branch-query-element>
+          <chat-app-recommended-action-search-element
+            *ngIf="response.data?.insight?.recommendedActions"
+            [elementData]="response.data.insight.recommendedActions"
+            (elementEventEmitter)="search($event)"
+          ></chat-app-recommended-action-search-element>
+          <chat-app-multiple-choice-search-element
+            *ngIf="response.data?.insight?.options?.length"
+            [elementData]="response.data.insight.options"
+            (elementEventEmitter)="search($event)"
+          ></chat-app-multiple-choice-search-element>
+          <chat-app-knowledge-answer-search-element
+            *ngIf="response?.knowledgeAnswers?.length"
+            [elementData]="response.knowledgeAnswers"
+          ></chat-app-knowledge-answer-search-element>
+
+          <chat-app-related-search-element
+            *ngIf="response.data?.relatedSuggestions"
+            [elementData]="response.data.relatedSuggestions"
+            (elementEventEmitter)="search($event)"
+          ></chat-app-related-search-element>
+          <chat-app-snippet-search-element
+            *ngIf="response.data?.snippet"
+            [elementData]="response.data.snippet"
+          ></chat-app-snippet-search-element>
+        </ng-container>
+      </chat-answer>
+    </div>
+    <div class="wrapper">
+      <chat-answer *ngIf="loadingResponse$ | async">
+        <chat-element-text>
+          <chat-loading-animation></chat-loading-animation> </chat-element-text
+      ></chat-answer>
+    </div>
+  </div>
+
+  <div class="search" [ngClass]="{ activated: activate }">
+    <div class="wrapper" [ngClass]="{ activated: activate }">
+      <h1 *ngIf="!activate" class="search__title">
+        {{ 'personal.search.title' | translate }}
+      </h1>
+      <h3 *ngIf="!activate" class="search__subtitle">
+        {{ 'personal.search.welcomeMessage' | translate }}
+      </h3>
+
+      <chat-input-element
+        [isSearch]="!activate"
+        [fgSearch]="fgSearch"
+        (fcEventEmitter)="search($event)"
+      ></chat-input-element>
+    </div>
+  </div>
+</ng-template>
